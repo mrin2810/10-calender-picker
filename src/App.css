@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
 
 * {
   padding: 0;
@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: 'Balsamiq Sans', cursive !important;
+  font-family: "Balsamiq Sans", cursive !important;
   background: #d6e3f8;
   min-height: 100vh;
   display: flex;
@@ -16,7 +16,7 @@ body {
 }
 
 button {
-  font-family: 'Balsamiq Sans', cursive !important;
+  font-family: "Balsamiq Sans", cursive !important;
 }
 
 .date-chooser {
@@ -65,4 +65,12 @@ button {
   cursor: pointer;
   color: #8096c1;
   background: none;
+}
+
+.calendar-day.is-selected {
+  background-color: #010f2e;
+}
+
+.calendar-day.is-in-range {
+  background-color: #1d3a79;
 }

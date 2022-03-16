@@ -54,8 +54,10 @@ export default function App() {
       <div className="calendar">
         {calendarDates.map((day, index) => {
           const dayNum = day + 1;
+          let isSelected = (dayNum === startDate || dayNum === endDate) ? 'is-selected' : '';
+          let isInRange = (endDate && dayNum > startDate && dayNum < endDate) ? 'is-in-range' : '';
           return <div 
-            className="calendar-day"
+            className={`calendar-day ${isSelected} ${isInRange}`}
             onClick={() => updateDate(dayNum)}
           >
             {dayNum}
