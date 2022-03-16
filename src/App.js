@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { css } from 'styled-components';
 import './App.css';
 
 const calendarDates = Array(31)
@@ -56,6 +57,8 @@ export default function App() {
           let isSelected = (dayNum === startDate || dayNum === endDate) ? 'is-selected' : '';
           let isInRange = (endDate && dayNum > startDate && dayNum < endDate) ? 'is-in-range' : '';
           return <StyledCalenderDay
+            isInRange={isInRange}
+            isSelected={isSelected}
             onClick={() => updateDate(dayNum)}
           >
             {dayNum}
@@ -111,4 +114,16 @@ const StyledCalenderDay = styled.div`
   cursor: pointer;
   color: #8096c1;
   background: none;
+
+  ${props => 
+      props.isSelected && css`
+      background-color: #010f2e;
+    `
+  }}
+
+  ${props => 
+      props.isInRange && css`
+      background-color: #1d3a79;
+    `
+  }}
 `;

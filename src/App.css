@@ -18,11 +18,3 @@ body {
 button {
   font-family: "Balsamiq Sans", cursive !important;
 }
-
-.calendar-day.is-selected {
-  background-color: #010f2e;
-}
-
-.calendar-day.is-in-range {
-  background-color: #1d3a79;
-}
