@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 const calendarDates = Array(31)
@@ -6,20 +6,60 @@ const calendarDates = Array(31)
   .map((e, i) => i);
 
 export default function App() {
+  const [dateType, setDateType] = useState('start');
+  const [startDate, setStartDate] = useState(0);
+  const [endDate, setEndDate] = useState(0);
+  
+  function updateDate(chosenDay) {
+    // if user chosenDay is before current range
+    if(startDate && chosenDay < startDate) {
+      setStartDate(chosenDay);
+      setDateType('end');
+      return;
+    }
+    // if user chosenDay is after current range
+    if(endDate && chosenDay > endDate) {
+      setEndDate(chosenDay);
+      setDateType('end');
+      return;
+    }
+    if(dateType === 'start') {
+      setStartDate(chosenDay);
+      setDateType('end');
+      return;
+    }
+
+    if(dateType === 'end') {
+      setEndDate(chosenDay);
+    }
+  }
+
   return (
     <>
       <div className="date-chooser">
-        <button className="date-chooser-button">
-          Start Date <span>0</span>
+        <button 
+          className="date-chooser-button"
+          onClick={() => setDateType('start')}
+        >
+          Start Date <span>{startDate}</span>
         </button>
-        <button className="date-chooser-button">
-          End Date <span>0</span>
+        <button 
+          className="date-chooser-button"
+          onClick={() => setDateType('end')}
+        >
+          End Date <span>{endDate}</span>
         </button>
       </div>
 
       <div className="calendar">
         {calendarDates.map((day, index) => {
-          return <div className="calendar-day">{day + 1}</div>;
+          const dayNum = day + 1;
+          return <div 
+            className="calendar-day"
+            onClick={() => updateDate(dayNum)}
+          >
+            {dayNum}
+          </div>;
         })}
       </div>
     </>
