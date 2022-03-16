@@ -15,6 +15,7 @@ export default function App() {
   const [dateType, setDateType] = useState('start');
   const [startDate, setStartDate] = useState(0);
   const [endDate, setEndDate] = useState(0);
+  const [hoverDate, setHoverDate] = useState(null);
   
   function updateDate(chosenDay) {
     // if user chosenDay is before current range
@@ -40,6 +41,11 @@ export default function App() {
     }
   }
 
+  function checkInRange(day) {
+    if(startDate && !endDate) return day > startDate && day < hoverDate;
+    return day > startDate && day < endDate;
+  }
+
   return (
     <>
       <StyledDateChooser>
@@ -60,12 +66,13 @@ export default function App() {
       <StyledCalender>
         {calendarDates.map((day, index) => {
           const dayNum = day + 1;
-          let isSelected = (dayNum === startDate || dayNum === endDate) ? 'is-selected' : '';
-          let isInRange = (endDate && dayNum > startDate && dayNum < endDate) ? 'is-in-range' : '';
+          let isSelected = (dayNum === startDate || dayNum === endDate);
+          let isInRange = checkInRange(dayNum);
           return <StyledCalenderDay
             isInRange={isInRange}
             isSelected={isSelected}
             onClick={() => updateDate(dayNum)}
+            onMouseOver={() => setHoverDate(dayNum)}
           >
             {dayNum}
           </StyledCalenderDay>;
